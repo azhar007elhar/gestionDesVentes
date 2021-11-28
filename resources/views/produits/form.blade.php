@@ -11,7 +11,14 @@
 
 <div class="form-group">
     <label for="marque">Marque</label>
-    <input class="form-control" type="text" name="marque" id="marque" value="{{old('marque' , $produit->marque ?? null )}}" aria-describedby="helpIdcontent">
+    {{-- <input class="form-control" type="text" name="marque" id="marque" value="{{old('marque' , $produit->marque ?? null )}}" aria-describedby="helpIdcontent"> --}}
+    <select name="marque" id="marque" class="form-control">
+        <option value=""></option>
+        <option value="HP">HP</option>
+        <option value="HP">DELL</option>
+        <option value="HP">LENOVO</option>
+        <option value="HP">MAC</option>
+    </select>
 </div>
 
 

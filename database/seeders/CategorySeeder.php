@@ -2,10 +2,9 @@
 
 namespace Database\Seeders;
 
-use App\Models\Client;
 use Illuminate\Database\Seeder;
 
-class ClientSeeder extends Seeder
+class CategorySeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,7 +13,6 @@ class ClientSeeder extends Seeder
      */
     public function run()
     {
-        $nb = (int)$this->command->ask("How many Client you want to generate ?", 10);
-        Client::factory($nb)->create();
+        //
     }
 }

@@ -14,6 +14,9 @@ class ProduitSeeder extends Seeder
      */
     public function run()
     {
-        Produit::factory(10)->create();
+
+        $nb = (int)$this->command->ask("How many Product you want to generate ?", 10);
+
+        Produit::factory($nb)->create();
     }
 }
