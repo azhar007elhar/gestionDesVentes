@@ -1,10 +1,12 @@
-@extends('layout')
-
+{{-- @extends('layout') --}}
+@extends('layouts.app')
 @section('content')
     <div class="container">
-        <br>
         <h1 style="text-align: center">List des Produits</h1>
-        <br>
+
+        <div class="text-right mb-3">
+            <a href="{{ route('produits.create') }}" class="btn btn-success text-right">Ajouter Produit</a>
+        </div>
 
         {{-- <div class="row">
             @forelse ($produits as $produit)
@@ -40,7 +42,7 @@
 
 
         <div class="row">
-            <table class="table table-bordered">
+            <table class="table table-bordered table-hover">
                 <thead>
                     <tr>
                         <th scope="col">#</th>
@@ -57,7 +59,7 @@
                         <tr>
                             
                             <th scope="row">{{ $loop->iteration }}</th>
-                            <td><img src="{{ $produit->image }}" alt="" width="50" height="50"></td>
+                            <td><img src="uploads/{{ $produit->image }}" alt="" width="50" height="50"></td>
                             <td>{{ $produit->libelle }}</td>
                             <td>{{ $produit->marque }}</td>
                             <td>{{ $produit->prix }}</td>

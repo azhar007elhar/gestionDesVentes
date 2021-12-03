@@ -10,4 +10,10 @@ class Produit extends Model
     use HasFactory;
 
     protected $fillable = ['libelle','marque','prix','qteStock','image'];
+
+
+    public function vente()
+    {
+        return $this->hasMany(Vente::class);
+    }
 }

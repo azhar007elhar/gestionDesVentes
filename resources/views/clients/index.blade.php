@@ -1,10 +1,13 @@
-@extends('layout')
+{{-- @extends('layout') --}}
+@extends('layouts.app')
 
 @section('content')
     <div class="container">
-        <br>
         <h1 style="text-align: center">List des Clients</h1>
-        <br>
+
+        <div class="text-right mb-3">
+            <a href="{{ route('clients.create') }}" class="btn btn-success text-right">Ajouter Client</a>
+        </div>
 
         <div class="row">
             <table class="table table-bordered">

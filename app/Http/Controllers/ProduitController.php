@@ -8,6 +8,13 @@ use Illuminate\Http\Request;
 
 class ProduitController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['index' , 'show']);
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -37,16 +44,38 @@ class ProduitController extends Controller
      */
     public function store(StoreProduit $request)
     {
-        $data = $request->only(['libelle','marque','prix','qteStock','image']);
-        $data['libelle'] = $data['libelle'] ;
-        $data['marque'] = $data['marque'] ;
-        $data['prix'] = $data['prix'] ;
-        $data['qteStock'] = $data['qteStock'] ;
-        $data['image'] = $data['image'] ;
-        $produits = Produit::create($data);
 
-        $request->session()->flash('status' , 'Produit was created!!');
-        return redirect()->route('produits.index');
+        if($request->hasFile('image')){
+            $data = $request->input('image');
+            $photo = $request->file('image')->getClientOriginalName();
+            $destination = base_path(). '/public/uploads' ;
+            $request->file('image')->move($destination , $photo);
+            $input = $request->all();
+            $input['image'] = $photo ;
+
+            // $data['image'] = $photo ;
+
+
+            // $extension = $request->file('image')->getClientOriginalExtension();
+            // $size = $request->file('image')->getSize();
+
+
+            $produits = Produit::create($input);
+
+            $request->session()->flash('status' , 'Produit was created!!');
+            return redirect()->route('produits.index');
+        }
+
+        // $data = $request->only(['libelle','marque','prix','qteStock','image']);
+        // $data['libelle'] = $data['libelle'] ;
+        // $data['marque'] = $data['marque'] ;
+        // $data['prix'] = $data['prix'] ;
+        // $data['qteStock'] = $data['qteStock'] ;
+
+        // $produits = Produit::create($input);
+
+        // $request->session()->flash('status' , 'Produit was created!!');
+        // return redirect()->route('produits.index');
     }
 
     /**
@@ -57,7 +86,7 @@ class ProduitController extends Controller
      */
     public function show($id)
     {
-        return view('produits.show', [ 'produit'  => Produit::find($id)]);
+        return view('produits.show', [ 'produit'  => Produit::findOrFail($id)]);
     }
 
     /**
@@ -88,7 +117,8 @@ class ProduitController extends Controller
         $produit->marque = $request->input('marque');
         $produit->prix = $request->input('prix');
         $produit->qteStock = $request->input('qteStock');
-        // $produit->image = $request->input('image');
+        $produit->image = $request->input('image');
+        
         $produit->save();
 
         $request->session()->flash('status' , 'Produit was updated!!');
