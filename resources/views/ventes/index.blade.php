@@ -6,9 +6,15 @@
 
         <h1 style="text-align: center">List des Ventes</h1>
 
-        <div class="text-right mb-3">
-            <a href="{{ route('ventes.create') }}" class="btn btn-success text-right">Ajouter Vente</a>
+        <div class="text-lg-right mb-3">
+            <button onclick="window.location='{{ route('ventes.create') }}'" class="btn btn-outline-success">Ajouter Vente</button> 
+            &nbsp;
+            <button onclick="window.location='{{ route('statistiqueVente') }}'" class="btn btn-outline-secondary">Statistique Vente</button>
         </div>
+
+
+
+
 
         <div class="row">
 

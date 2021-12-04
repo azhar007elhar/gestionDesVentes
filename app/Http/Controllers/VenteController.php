@@ -131,4 +131,17 @@ class VenteController extends Controller
         $request->session()->flash('status' , 'Vente was deleted!!');
         return redirect()->route('ventes.index');
     }
+
+
+    public function venteByProducts(){
+
+        $listProduct = Produit::all();
+        foreach ($listProduct as $key => $product) {
+            $product->sales = Vente::where('produit_id' , $product->id)->count();
+            $product->qty = Vente::where('produit_id' , $product->id)->sum('qtevendu');
+        }
+
+        return view('ventes.statistiqueVente', ['listVenteByProducts' => $listProduct]);
+    }
+
 }

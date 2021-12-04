@@ -26,6 +26,9 @@ Route::get('/', function () {
 Route::resource('produits', ProduitController::class);
 Route::resource('clients', ClientController::class);
 Route::resource('ventes', VenteController::class);
+Route::get('statistiqueVente', [VenteController::class , 'venteByProducts'])->name('statistiqueVente');
+
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
