@@ -28,6 +28,8 @@ Route::resource('clients', ClientController::class);
 Route::resource('ventes', VenteController::class);
 Route::get('statistiqueVente', [VenteController::class , 'venteByProducts'])->name('statistiqueVente');
 
+Route::get('export', [ProduitController::class, 'export'])->name('export');
+
 
 Auth::routes();
 

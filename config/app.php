@@ -179,6 +179,9 @@ return [
         // QR 
         SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class,
 
+        // Export Excel 
+        Maatwebsite\Excel\ExcelServiceProvider::class,
+
     ],
 
     /*
@@ -235,6 +238,8 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class,
+
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
     ],
 
 ];

@@ -2,16 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\ProduitsExport;
 use App\Http\Requests\StoreProduit;
 use App\Models\Produit;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ProduitController extends Controller
 {
 
     public function __construct()
     {
-        $this->middleware('auth')->except(['index' , 'show']);
+        $this->middleware('auth')->except(['index', 'show']);
     }
 
 
@@ -23,7 +25,7 @@ class ProduitController extends Controller
     public function index()
     {
         $produit = Produit::latest()->paginate(10);
-        return view('produits.index' , ['produits' => $produit]);
+        return view('produits.index', ['produits' => $produit]);
     }
 
     /**
@@ -45,13 +47,13 @@ class ProduitController extends Controller
     public function store(StoreProduit $request)
     {
 
-        if($request->hasFile('image')){
+        if ($request->hasFile('image')) {
             $data = $request->input('image');
             $photo = $request->file('image')->getClientOriginalName();
-            $destination = base_path(). '/public/uploads' ;
-            $request->file('image')->move($destination , $photo);
+            $destination = base_path() . '/public/uploads';
+            $request->file('image')->move($destination, $photo);
             $input = $request->all();
-            $input['image'] = $photo ;
+            $input['image'] = $photo;
 
             // $data['image'] = $photo ;
 
@@ -62,7 +64,7 @@ class ProduitController extends Controller
 
             $produits = Produit::create($input);
 
-            $request->session()->flash('status' , 'Produit was created!!');
+            $request->session()->flash('status', 'Produit was created!!');
             return redirect()->route('produits.index');
         }
 
@@ -86,7 +88,7 @@ class ProduitController extends Controller
      */
     public function show($id)
     {
-        return view('produits.show', [ 'produit'  => Produit::findOrFail($id)]);
+        return view('produits.show', ['produit'  => Produit::findOrFail($id)]);
     }
 
     /**
@@ -118,10 +120,10 @@ class ProduitController extends Controller
         $produit->prix = $request->input('prix');
         $produit->qteStock = $request->input('qteStock');
         $produit->image = $request->input('image');
-        
+
         $produit->save();
 
-        $request->session()->flash('status' , 'Produit was updated!!');
+        $request->session()->flash('status', 'Produit was updated!!');
         return redirect()->route('produits.index');
     }
 
@@ -131,11 +133,30 @@ class ProduitController extends Controller
      * @param  \App\Models\Produit  $produit
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request ,$id)
+    public function destroy(Request $request, $id)
     {
         Produit::destroy($id);
 
-        $request->session()->flash('status' , 'Product was deleted!!');
+        $request->session()->flash('status', 'Product was deleted!!');
         return redirect()->route('produits.index');
+    }
+
+
+    /**
+     * @return \Illuminate\Support\Collection
+     */
+    public function export()
+    {
+        return Excel::download(new ProduitsExport, 'produits.xlsx');
+    }
+
+    /**
+     * @return \Illuminate\Support\Collection
+     */
+    public function import()
+    {
+        Excel::import(new ProduitsExport, request()->file('file'));
+
+        return back();
     }
 }

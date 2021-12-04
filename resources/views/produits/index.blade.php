@@ -4,8 +4,13 @@
     <div class="container">
         <h1 style="text-align: center">List des Produits</h1>
 
-        <div class="text-right mb-3">
-            <a href="{{ route('produits.create') }}" class="btn btn-success text-right">Ajouter Produit</a>
+
+
+
+        <div class="text-lg-right mb-3">
+            <button onclick="window.location='{{ route('produits.create') }}'" class="btn btn-outline-success">Ajouter Produit</button> 
+            &nbsp;
+            <button onclick="window.location='{{ route('export') }}'" class="btn btn-outline-secondary">Export Produits</button>
         </div>
 
         {{-- <div class="row">

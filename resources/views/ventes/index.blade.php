@@ -7,18 +7,17 @@
         <h1 style="text-align: center">List des Ventes</h1>
 
         <div class="text-lg-right mb-3">
-            <button onclick="window.location='{{ route('ventes.create') }}'" class="btn btn-outline-success">Ajouter Vente</button> 
+            <button onclick="window.location='{{ route('ventes.create') }}'" class="btn btn-outline-success">Ajouter
+                Vente</button>
             &nbsp;
-            <button onclick="window.location='{{ route('statistiqueVente') }}'" class="btn btn-outline-secondary">Statistique Vente</button>
+            <button onclick="window.location='{{ route('statistiqueVente') }}'"
+                class="btn btn-outline-secondary">Statistique Vente</button>
         </div>
-
-
-
 
 
         <div class="row">
 
-            <table class="table table-bordered">
+            <table class="table table-bordered table-hover">
                 <thead>
                     <tr class="nowrap">
                         <th scope="col">#</th>
@@ -30,12 +29,13 @@
                         <th scope="col">Produit</th>
                         <th scope="col">Marque</th>
                         <th scope="col">Prix Produit</th>
+                        <th scope="col">Total</th>
                         <th colspan="2">Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     @forelse ($ventes as $vente)
-                        <tr class="nowrap">
+                        <tr class="nowrap" onclick="window.location='{{ route('ventes.edit', ['vente' => $vente->id]) }}'" style="cursor: pointer" title="Modifier">
                             <th scope="row">{{ $vente->id }}</th>
                             <td>{{ $vente->qtevendu }}</td>
                             <td>{{ $vente->datevente }}</td>
@@ -45,6 +45,7 @@
                             <td>{{ $vente->produit->libelle }}</td>
                             <td>{{ $vente->produit->marque }}</td>
                             <td>{{ $vente->produit->prix }}</td>
+                            <td>{{ $vente->prixvendu * $vente->qtevendu }} DH</td>
 
                             <td>
                                 <a class="btn btn-outline-primary"
@@ -69,7 +70,7 @@
         </div>
 
         <nav aria-label="Page">
-            {{$ventes->links()}}
+            {{ $ventes->links() }}
         </nav>
 
     </div>
