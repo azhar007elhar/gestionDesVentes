@@ -51,6 +51,7 @@
                         <th scope="col">Marque</th>
                         <th scope="col">Prix</th>
                         <th scope="col">Qte Stock</th>
+                        <th scope="col">QR</th>
                         <th colspan="2">Action</th>
                     </tr>
                 </thead>
@@ -64,6 +65,7 @@
                             <td>{{ $produit->marque }}</td>
                             <td>{{ $produit->prix }}</td>
                             <td>{{ $produit->qteStock }}</td>
+                            <td>{!! QrCode::size(50)->generate($produit->libelle) !!}</td>
 
                             <td>
                                 <a class="btn btn-outline-primary"
