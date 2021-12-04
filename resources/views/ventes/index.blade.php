@@ -68,9 +68,9 @@
             </table>
         </div>
 
-        {{-- <nav aria-label="Page">
+        <nav aria-label="Page">
             {{$ventes->links()}}
-        </nav> --}}
+        </nav>
 
     </div>
 

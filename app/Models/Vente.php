@@ -11,12 +11,12 @@ class Vente extends Model
 
     protected $fillable = ['qtevendu','datevente','prixvendu','client_id','produit_id'];
 
-    public function clients()
+    public function client()
     {
         return $this->belongsTo(Client::class);
     }
 
-    public function produits() 
+    public function produit() 
     {
         return $this->belongsTo(Produit::class);
     }

@@ -17,18 +17,19 @@
 
             function drawChart() {
                 var data = google.visualization.arrayToDataTable([
-                    ['Produit', 'Ventes', 'Quantités'],
+                    ['Produit', 'Total Ventes', ],
+                    // 'Quantités'],
 
                     @php
                     foreach ($listVenteByProducts as $product) {
-                        echo "['" . $product->libelle . "', " . $product->sales . ', ' . $product->qty . '],';
+                        echo "['" . $product->libelle . "', "  . $product->qty . '],';
                     }
                     @endphp
                 ]);
 
                 var options = {
                     chart: {
-                        title: 'Bar Graph | Ventes',
+                        title: 'Bar Graph | Total Ventes',
                         subtitle: 'Ventes, et Quantités: @php echo $listVenteByProducts[0]->created_at @endphp',
                     },
                     bars: 'vertical'

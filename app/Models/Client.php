@@ -12,8 +12,8 @@ class Client extends Model
     protected $fillable = ['nom','prenom','tele'];
 
 
-    public function vente()
-    {
-        return $this->hasMany(Vente::class);
-    }
+    // public function vente()
+    // {
+    //     return $this->hasMany(Vente::class);
+    // }
 }

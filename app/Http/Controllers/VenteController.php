@@ -26,11 +26,11 @@ class VenteController extends Controller
     {
         // $ventes = Vente::latest()->paginate(10);
         // $ventes = Vente::with('clients', 'produits')->get();
-        $ventes = Vente::latest()->paginate(10);
-        foreach ($ventes as $key => $vente) {
-            $vente->client = Client::findOrFail($vente->client_id) ; 
-            $vente->produit = Produit::findOrFail($vente->produit_id) ; 
-        }
+        $ventes = Vente::with('Client', 'Produit')->paginate(100);
+        // foreach ($ventes as $key => $vente) {
+        //     $vente->client = Client::findOrFail($vente->client_id) ; 
+        //     $vente->produit = Produit::findOrFail($vente->produit_id) ; 
+        // }
 
         return view('ventes.index' , ['ventes' => $ventes]);
     }
