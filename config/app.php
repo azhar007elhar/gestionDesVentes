@@ -182,6 +182,10 @@ return [
         // Export Excel 
         Maatwebsite\Excel\ExcelServiceProvider::class,
 
+        // PDF Generate
+        Barryvdh\DomPDF\ServiceProvider::class,
+        // Meneses\LaravelMpdf\LaravelMpdfServiceProvider::class
+
     ],
 
     /*
@@ -240,6 +244,9 @@ return [
         'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class,
 
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+
+        'PDF' => Barryvdh\DomPDF\Facade::class,
+        // 'PDF' => Meneses\LaravelMpdf\Facades\LaravelMpdf::class
     ],
 
 ];

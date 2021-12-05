@@ -30,6 +30,7 @@
                         <th scope="col">Marque</th>
                         <th scope="col">Prix Produit</th>
                         <th scope="col">Total</th>
+                        <th scope="col">Facture</th>
                         <th colspan="2">Action</th>
                     </tr>
                 </thead>
@@ -46,6 +47,9 @@
                             <td>{{ $vente->produit->marque }}</td>
                             <td>{{ $vente->produit->prix }}</td>
                             <td>{{ $vente->prixvendu * $vente->qtevendu }} DH</td>
+
+                            <td><a href="/ventes/facture/{{$vente->client_id}}">Facture</a></td>
+
 
                             <td>
                                 <a class="btn btn-outline-primary"

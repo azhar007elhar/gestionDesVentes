@@ -9,6 +9,8 @@ use App\Models\Client;
 use App\Models\Produit;
 use Illuminate\Http\Request;
 
+use PDF;
+
 class VenteController extends Controller
 { 
 
@@ -92,8 +94,7 @@ class VenteController extends Controller
 
         $vente = Vente::findOrFail($id);
         return view('ventes.edit',  [
-            'vente' => $vente ,
-            'clients' => $clients , 'produits' => $produits
+            'vente' => $vente ,'clients' => $clients , 'produits' => $produits
         ]);
     }
 
@@ -142,6 +143,31 @@ class VenteController extends Controller
         }
 
         return view('ventes.statistiqueVente', ['listVenteByProducts' => $listProduct]);
+    }
+
+
+    public function facture($client_id){
+        $factures = Vente::where('client_id' , $client_id)->with('Client', 'Produit')->get();
+        return view('ventes.facture', ['factures' => $factures]);
+    }
+
+    public function imprimerFacture($client_id){
+        $factures = Vente::where('client_id' , $client_id)->with('Client', 'Produit')->get();
+
+        $pdf = PDF::loadView('ventes.facture', ['factures' => $factures]);
+        // return $pdf->stream('facture.pdf');
+        $pdf->download('facture.pdf');
+
+        return view('ventes.facture', ['factures' => $factures]);
+    }
+
+
+    public function invoice(){
+        $factures = Vente::where('client_id' , 2)->with('Client', 'Produit')->get();
+        $produit = Produit::findOrFail(1);
+        $pdf = PDF::loadView('ventes.invoice' ,  ['factures' => $factures] );
+        return $pdf->download('facture.pdf');
+
     }
 
 }

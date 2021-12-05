@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Exports\ProduitsExport;
 use App\Http\Requests\StoreProduit;
 use App\Models\Produit;
+use App\Models\Vente;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -159,4 +160,5 @@ class ProduitController extends Controller
 
         return back();
     }
+
 }

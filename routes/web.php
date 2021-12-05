@@ -29,6 +29,9 @@ Route::resource('ventes', VenteController::class);
 Route::get('statistiqueVente', [VenteController::class , 'venteByProducts'])->name('statistiqueVente');
 
 Route::get('export', [ProduitController::class, 'export'])->name('export');
+Route::get('ventes/facture/{client_id}', [VenteController::class , 'facture'])->name('ventes.facture');
+Route::get('ventes/imprimerFacture/{client_id}', [VenteController::class , 'imprimerFacture'])->name('ventes.imprimerFacture');
+Route::get('invoice', [VenteController::class , 'invoice']);
 
 
 Auth::routes();
